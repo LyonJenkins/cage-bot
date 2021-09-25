@@ -6,7 +6,7 @@ import {fetchPlayers} from "../database/controllers/player";
 
 app.get('/whitelist', (req, res) => {
     fetchPlayers().then(players => {
-        let adminList = 'Group=Whitelist:reserve\n\n'
+        let adminList = 'Group=Whitelist:reserve,cameraman\n\n'
         for(const player of players) {
             adminList += `Admin=${player.steamID}:Whitelist // ${player.discordID}\n`
         }
@@ -17,7 +17,7 @@ app.get('/whitelist', (req, res) => {
 export default {
     execute() {
         app.listen(port, () => {
-            console.log(`Example app listening at http://localhost:${port}`)
+            console.log(`Whitelist API listening at http://localhost:${port}`)
         })
     }
 }
