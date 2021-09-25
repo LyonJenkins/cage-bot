@@ -6,7 +6,7 @@ import {fetchPlayers} from "../database/controllers/player";
 
 app.get('/whitelist', (req, res) => {
     fetchPlayers().then(players => {
-        let adminList = 'Group=Whitelist:reserve,cameraman\n\n'
+        let adminList = 'Group=Whitelist:reserve\n\n'
         for(const player of players) {
             adminList += `Admin=${player.steamID}:Whitelist // ${player.discordID}\n`
         }
