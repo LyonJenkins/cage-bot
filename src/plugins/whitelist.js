@@ -1,8 +1,6 @@
 import { WHITELIST_CHANNEL, WHITELIST_ROLE } from '../../config.json'
 import { getSteamUser } from '../utilities'
 import { newPlayer, fetchPlayers, removePlayer }  from "../database/controllers/player";
-import { Player } from '../database/models';
-import { connect } from '../database/main';
 
 export default {
     execute(client) {
