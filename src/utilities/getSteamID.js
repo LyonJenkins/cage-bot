@@ -44,9 +44,9 @@ async function get64ID(url) {
         return {response: {steamid: id}};
     }
     try {
-        const response = await got(`http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${steamAPIkey}&vanityurl=${vanityUrl}`);
+        const response = await got(`http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${STEAM_API_KEY}&vanityurl=${vanityUrl}`);
         return JSON.parse(response.body);
     } catch (error) {
-        console.log(error.response.body);
+        console.log(error);
     }
 }
