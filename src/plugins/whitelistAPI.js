@@ -8,7 +8,7 @@ app.get('/whitelist', (req, res) => {
     fetchPlayers().then(players => {
         let adminList = 'Group=Whitelist:reserve\n\n'
         for(const player of players) {
-            adminList += `Admin=${player.steamID}:Whitelist // ${player.discordID}\n`
+            adminList += `Admin=${player.steamID}:Whitelist // ID = ${player.discordID} Username = ${player.discordName}\n`
         }
         res.send(adminList)
     })
