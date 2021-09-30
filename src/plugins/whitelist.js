@@ -76,7 +76,7 @@ async function addToWhitelist(message) {
                         message.delete()
                     }, 5000)
                 })
-                const newPlayerToAdd = {discordID: message.author.id, steamID: steamUser.steamID}
+                const newPlayerToAdd = {discordID: message.author.id, steamID: steamUser.steamID, discordName: message.author.tag}
                 newPlayer(newPlayerToAdd)
             }
         }
