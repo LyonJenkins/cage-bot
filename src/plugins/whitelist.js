@@ -7,9 +7,6 @@ export default {
         client.on('messageCreate', message => {
             if(message.channel.id === WHITELIST_CHANNEL && message.author.id !== client.user.id) {
                 addToWhitelist(message);
-                delay(5000).then(() => {
-                    message.delete()
-                })
             }
         });
         client.on('guildMemberUpdate', (oldMember, newMember)  => {
@@ -48,24 +45,36 @@ async function addToWhitelist(message) {
     const steamUser = await getSteamUser(message.content)
     if(steamUser == null) {
         message.reply('wrong input or that Steam user does not exist.').then(reply => {
-            setTimeout(() => reply.delete(), 5000)
+            setTimeout(() => {
+                reply.delete()
+                message.delete()
+            }, 5000)
         })
     } else {
         const players = await fetchPlayers();
         const foundPlayerDiscordID = players.find(player => player.discordID === message.author.id)
         if(foundPlayerDiscordID) {
             message.reply('you already have a Steam ID linked with your Discord account.').then(reply => {
-                setTimeout(() => reply.delete(), 5000)
+                setTimeout(() => {
+                    reply.delete()
+                    message.delete()
+                }, 5000)
             })
         } else {
             const foundPlayerSteamID = players.find(player => player.steamID === steamUser.steamID)
             if(foundPlayerSteamID) {
                 message.reply('that SteamID is already in use.').then(reply => {
-                    setTimeout(() => reply.delete(), 5000)
+                    setTimeout(() => {
+                        reply.delete()
+                        message.delete()
+                    }, 5000)
                 })
             } else {
-                message.reply('linked Steam user ${steamUser.nickname} with your account.').then(reply => {
-                    setTimeout(() => reply.delete(), 5000)
+                message.reply(`linked Steam user ${steamUser.nickname} with your account.`).then(reply => {
+                    setTimeout(() => {
+                        reply.delete()
+                        message.delete()
+                    }, 5000)
                 })
                 const newPlayerToAdd = {discordID: message.author.id, steamID: steamUser.steamID}
                 newPlayer(newPlayerToAdd)
@@ -85,5 +94,3 @@ function removeMemberFromWhitelist(discordGuildMember) {
         }
     })
 }
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
