@@ -11,6 +11,8 @@ app.get('/whitelist', (req, res) => {
         for(const player of players) {
             adminList += `Admin=${player.steamID}:Whitelist // ID = ${player.discordID} Username = ${player.discordName}\n`
         }
+        res.attachment("whitelist.cfg")
+        res.type("cfg")
         res.send(adminList)
     })
 })
